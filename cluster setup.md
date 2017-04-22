@@ -1,9 +1,8 @@
-
-#A tutorial to install and setup couchdb clusters on Ubuntu 16.04
+# A tutorial to install and setup couchdb clusters on Ubuntu 16.04
 
 Installing and setup a couchdb cluster cost me three days due to less resource and poor documentation in the Internet.After rolling back my three VMs for more than 20 times...I finally set it up. This post is for any couchdb beginner to build his/her own database cluster system. If you prefer a Chinese version, plase see this link.[CLICK ME](http://101.100.232.7)
 
-##Fist you should have three Ubuntu 16.04 virtual machines :)
+## Fist you should have three Ubuntu 16.04 virtual machines :)
 
 Login to your virtual machine, I believe you are currently ***using 'ubuntu' user.***
 
@@ -11,7 +10,7 @@ Now enter"```sudo passwd```, and enter your password for your root user and conf
 run command ```su -``` and login.
 Now you should being using your root user.
 
-##Now we start to install couchdb
+## Now we start to install couchdb
 *run following command:
 ```
 mkdir temp
@@ -25,7 +24,7 @@ You don't need to worry abouth what excatly they are.They are but some bash comm
 
 After doing aboves, You have three couchdb instances running on your VMs individually!
 
-##Now we CLUSTER it:
+## Now we CLUSTER it:
 
 Begin with your first virtual machine:
 run the commands:
@@ -68,14 +67,15 @@ to
 ```
 ***(this is very important and it MUST be excatly like 'couchdb@xxx.xxx.xxx.xxx'.)***
 
-
-then we build up our erlang config, run command:
+Then we build up our erlang config, run command:
+```
 cd /root/temp/apache-couchdb-2.0.0/rel/couchdb/releases/2.0.0
 ls
 nano sys.args
-then change the "[]."to this:
+```
+then change the ```[].```to this:
 
-*******copy and paste everything between these two lines********
+```
 [
     {lager, [
         {error_logger_hwm, 1000},
@@ -96,42 +96,46 @@ then change the "[]."to this:
         {inet_dist_listen_max, 9200}
     ]}
 ].
-*******copy and paste everything between these two lines********
+```
 
 Then we return to our temp director with commands and reinitial it:
+```
 cd /root/temp
 sh reinit.sh
-then we should see something like this:
+```
+After dong so we should see something like this:
 {"all_nodes":["couchdb@111.222.333.44"],"cluster_nodes":["couchdb@111.222.333.44"]}
-the it is "couchdb@localhost" rather than couchdb@111.222.333.44, this is because your database did not successfully
+***If it is "couchdb@localhost" rather than couchdb@111.222.333.44, this is because your database did not successfully
 configure your name in vm.args file. you may consider try to bind it to the proper name it mentioned before.
 
-now we install curl:
+now we install curl and run command:
+```
 apt-get install curl
-then run command:
-
 curl -X PUT http://127.0.0.1:5984/_node/couchdb@[your ip address]/_config/admins/admin1 -d '"password"'
 curl -X PUT http://127.0.0.1:5984/_node/couchdb@[your ip address]/_config/chttpd/bind_address -d '"0.0.0.0"'
-
+```
 Do above things for all your VMs. we are about there!
 
-Now. On your LOCAL MACHINE a mac or window:
+## Now. On your LOCAL MACHINE a mac or window:
 Let's build a ssh tunnel:
-
-ssh -N -L 9000:localhost:5984 ubuntu:[your vm password]@[your VM ip address] ## you may need a private key to login, though actually we
-                                                                             ## are not logging in.
+```
+ssh -N -L 9000:localhost:5984 ubuntu:[your vm password]@[your VM ip address] 
+```
+## you may need a private key to login, though actually we are not logging in.
 then use a web browser, I prefer Chrome, enter the address:
 
-http://localhost:9000/_utils/
-
-then login and setup as a cluster.
+```http://localhost:9000/_utils/
+```
+Then login and setup as a cluster.
 enter the admin and password,
 add other two nodes then click config the cluster.
 
 ALl DONE!
 To check if you made it properly:
+```
 http://localhost:9000/_membership/
-you are suppose to see this:
+```
+You are suppose to see this:
 
 {"all_nodes":["couchdb@111.222.333.44","couchdb@123.423.25.534.62","couchdb@22.66.55.33"],
 "cluster_nodes":["couchdb@111.222.333.44","couchdb@123.423.25.534.62","couchdb@22.66.55.33"]}
