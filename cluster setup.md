@@ -11,7 +11,7 @@ run command ```su -``` and login.
 Now you should being using your root user.
 
 ## Now we start to install couchdb
-*run following command:
+* run following command:
 ```
 mkdir temp
 cd temp
@@ -35,7 +35,7 @@ ls
 ```
 ***now you can see three files in the folder, let's modify two of them:
 
-**For the local.ini:
+* For the local.ini:
 
 run command : 
 ```
@@ -52,7 +52,7 @@ port=5984
 bind_address= [your ip address]
 ```
 
-**For the vm.args:
+* For the vm.args:
 run command: 
 ```nano local.ini
 ```
