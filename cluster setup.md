@@ -1,6 +1,6 @@
 # A tutorial to install and setup couchdb clusters on Ubuntu 16.04
 
-Installing and setup a couchdb cluster cost me three days due to less resource and poor documentation in the Internet.After rolling back my three VMs for more than 20 times...I finally set it up. This post is for any couchdb beginner to build his/her own database cluster system. If you prefer a Chinese version, plase see this link.[CLICK ME](http://101.100.232.7)
+Installing and setup a couchdb cluster cost me three days due to less resource and poor documentation in the Internet.After rolling back my three VMs for more than 20 times...I finally set it up. This post is for any couchdb beginner to build his/her own database cluster system. If you prefer a Chinese version, plase see this link.[CLICK ME](http://101.200.232.7)
 
 ## Fist you should have three Ubuntu 16.04 virtual machines :)
 
@@ -33,7 +33,7 @@ su -
 cd temp/apache-couchdb-2.0.0/rel/couchdb/etc/
 ls
 ```
-***now you can see three files in the folder, let's modify two of them:
+***now you can see three files in the folder, let's modify two of them:***
 
 * For the local.ini:
 
@@ -136,12 +136,12 @@ To check if you made it properly:
 http://localhost:9000/_membership/
 ```
 You are suppose to see this:
-
+```
 {"all_nodes":["couchdb@111.222.333.44","couchdb@123.423.25.534.62","couchdb@22.66.55.33"],
 "cluster_nodes":["couchdb@111.222.333.44","couchdb@123.423.25.534.62","couchdb@22.66.55.33"]}
-
+```
 If not so.....You may consider do it again or check it whether the database config your '-name' or try restart it by 
 'sv restasrt couchdb'
 
-If I were you, I would definitly not choose CouchDB. It's dirty!!
+If I were you, I would definitly not choose CouchDB (This is my assignment...). It's dirty!!
 
