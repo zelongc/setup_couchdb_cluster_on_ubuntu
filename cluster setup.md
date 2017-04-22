@@ -1,54 +1,73 @@
-Installing and setup a couchdb cluster cost me three days due to less resource and poor documentation in the Internet..
-After rolling back my three VMs for more than 20 times...I finally set it up. This post is for any couchdb beginner 
-to build his/her own database cluster system. If you prefer a Chinese version, plase refer this link.[xx]
 
-**Fist you should have three Ubuntu 16.04 virtual machines :)
+#A tutorial to install and setup couchdb clusters on Ubuntu 16.04
 
-Login to your virtual machine, I believe you are currently using 'ubuntu' user.
+Installing and setup a couchdb cluster cost me three days due to less resource and poor documentation in the Internet.After rolling back my three VMs for more than 20 times...I finally set it up. This post is for any couchdb beginner to build his/her own database cluster system. If you prefer a Chinese version, plase see this link.[CLICK ME](http://101.100.232.7)
 
-Now enter"sudo passwd", and enter your password for your root user and confirm it by enterning password again.
-run command "su -" and enter the password you just set.
+##Fist you should have three Ubuntu 16.04 virtual machines :)
 
-Now you should being using yoru root user.
-run following command:
+Login to your virtual machine, I believe you are currently ***using 'ubuntu' user.***
 
+Now enter"```sudo passwd```, and enter your password for your root user and confirm it by enterning password again.
+run command ```su -``` and login.
+Now you should being using your root user.
+
+##Now we start to install couchdb
+*run following command:
+```
 mkdir temp
 cd temp
 wget https://raw.githubusercontent.com/afiskon/install-couchdb/master/install-couchdb.sh
 wget https://raw.githubusercontent.com/afiskon/install-couchdb/master/install-couchdb.sh
 sh install-couchdb.sh
-
-you don't need to worry abouth what excatly they are. everything got finined in 5 seconds.
-Then do the same things for all VMs
+```
+You don't need to worry abouth what excatly they are.They are but some bash command in a file to make it easier to be used by linux beginner, everything got finined in 5 seconds.
+***Then do the same things for all VMs***
 
 After doing aboves, You have three couchdb instances running on your VMs individually!
-Now we CLUSTER it:
+
+##Now we CLUSTER it:
 
 Begin with your first virtual machine:
 run the commands:
-
+```
 su -
 cd temp/apache-couchdb-2.0.0/rel/couchdb/etc/
 ls
+```
+***now you can see three files in the folder, let's modify two of them:
 
-##now you can see three files in the folder, let's modify two of them:
+**For the local.ini:
 
-For the local.ini:
 run command : 
+```
 nano local.ini
+```
 then change:
+```
 ;port = 5984
 ;bind_address=127.0.0.1
+```
 to:
+```
 port=5984
 bind_address= [your ip address]
+```
 
-For the vm.args:
-run command: nano local.ini
+**For the vm.args:
+run command: 
+```nano local.ini
+```
 then change:
+```
 -name couchdb@localhost
+```
+
 to 
--name couchdb@[your ip address]   # this is very important and it MUST be excatly like 'couchdb@xxx.xxx.xxx.xxx'.
+```
+-name couchdb@[your ip address]
+```
+***(this is very important and it MUST be excatly like 'couchdb@xxx.xxx.xxx.xxx'.)***
+
 
 then we build up our erlang config, run command:
 cd /root/temp/apache-couchdb-2.0.0/rel/couchdb/releases/2.0.0
