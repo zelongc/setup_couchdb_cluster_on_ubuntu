@@ -1,4 +1,6 @@
 # A tutorial to install and setup couchdb clusters on Ubuntu 16.04
+### Author: Zelong Cong , Uniersity of Melbourne
+
 
 Installing and setup a couchdb cluster cost me three days due to less resource and poor documentation in the Internet.After rolling back my three VMs for more than 20 times...I finally set it up. This post is for any couchdb beginner to build his/her own database cluster system. If you prefer a Chinese version, plase see this link.[CLICK ME](http://101.200.232.7)
 
