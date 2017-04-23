@@ -118,13 +118,13 @@ curl -X PUT http://127.0.0.1:5984/_node/couchdb@[your ip address]/_config/chttpd
 ```
 Do above things for all your VMs. we are about there!
 
-## Now. On your LOCAL MACHINE a mac or window:
-Let's build a ssh tunnel:
+## Now. On your LOCAL MACHINE, mac or windows:
+Don't waster your time to build a graphic os, Let's build a ssh tunnel to use Fauxton:
 ```
 ssh -N -L 9000:localhost:5984 ubuntu:[your vm password]@[your VM ip address] 
 ```
 ## you may need a private key to login, though actually we are not logging in.
-then use a web browser, I prefer Chrome, enter the address:
+then use a web browser, I prefer Chrome personally, enter the address:
 
 ```http://localhost:9000/_utils/
 ```
