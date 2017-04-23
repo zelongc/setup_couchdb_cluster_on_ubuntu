@@ -4,7 +4,7 @@
 
 Installing and setup a couchdb cluster cost me three days due to less resource and poor documentation in the Internet.After rolling back my three VMs for more than 20 times...I finally set it up. This post is for any couchdb beginner to build his/her own database cluster system. If you prefer a Chinese version, plase see this link.[CLICK ME](http://101.200.232.7)
 
-## Fist you should have three Ubuntu 16.04 virtual machines :)
+## First you should have three Ubuntu 16.04 virtual machines :)
 
 Login to your virtual machine, I believe you are currently ***using 'ubuntu' user.***
 
