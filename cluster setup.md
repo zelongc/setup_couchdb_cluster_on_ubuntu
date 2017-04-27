@@ -32,7 +32,7 @@ Begin with your first virtual machine:
 run the commands:
 ```
 su -
-cd temp/apache-couchdb-2.0.0/rel/couchdb/etc/
+cd home/couchdb/etc/
 ls
 ```
 ***now you can see three files in the folder, let's modify two of them:***
@@ -71,7 +71,7 @@ to
 
 Then we build up our erlang config, run command:
 ```
-cd /root/temp/apache-couchdb-2.0.0/rel/couchdb/releases/2.0.0
+cd /home/couchdb/releases/2.0.0
 ls
 nano sys.args
 ```
@@ -100,10 +100,9 @@ then change the ```[].```to this:
 ].
 ```
 
-Then we return to our temp director with commands and reinitial it:
+OK, we just finished basic environment,now type:
 ```
-cd /root/temp
-sh reinit.sh
+curl http://localhost:5984/_membership
 ```
 After dong so we should see something like this:
 {"all_nodes":["couchdb@111.222.333.44"],"cluster_nodes":["couchdb@111.222.333.44"]}
